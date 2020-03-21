@@ -21,7 +21,7 @@ Forkki Ynnän Jyrkibotista joka toimii hyödyntäen yleisempää webbikameratouh
     - (apt-get install fswebcam)
   - node-webcam
     - npm install node-webcam
-- luo .env botillesi samaan kansioon, sisällöksi:
+- luo ".env" tiedosto botillesi samaan kansioon, sisällöksi:
   - API_KEY:SunBottisiOmaSalainenAvain
 - muuta server.js käyttöösi sopivaksi
   - muuta rivi 61 kanavanimi haluamaksesi
