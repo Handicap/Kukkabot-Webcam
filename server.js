@@ -1,7 +1,7 @@
 require("dotenv").config();
 const apikey = process.env.API_KEY; // Ladataan salainen api-avain .env-tiedostosta
 
-const Discord = require("discord.js");
+import { Client } from "discord.js";
 
 /*
 const PiCamera = require('pi-camera');
@@ -14,7 +14,7 @@ const myCamera = new PiCamera({
 });*/
 
 
-var NodeWebcam = require("node-webcam");
+import { capture } from "node-webcam";
 
 //Default options 
 var opts = {
@@ -34,7 +34,7 @@ const commands = {
         msg.channel.send("Apua! Oon vaan kukka! :(");
     },
     kukka: function (msg) {
-        NodeWebcam.capture("images/kukka", opts, function (err, data){
+        capture("images/kukka", opts, function (err, data){
             if (!err){
                 console.log("Picture taken!");
                 //msg.channel.send("Naks! :)");
@@ -49,17 +49,18 @@ const commands = {
 }
 
 var prevtime = 0;
-
-const bot = new Discord.Client();
+console.log("Initializing bot");
+const bot = new Client();
 
 bot.on("ready", () => {
-    console.log("Ready");
+    console.log("Discord connection ready");
 });
 
 bot.on("message", async message => {
     if (message.author.bot) return; // Jos botti lähettää viestin niin ignoorataan
     if (message.channel.name != "puutarha") return; // Kuunnellaan vaan tietyllä kanavalla
 	//TODO: siirrä muuttujat jsoniksi
+
 
     var currtime = new Date();
     currtime = currtime.getTime();
