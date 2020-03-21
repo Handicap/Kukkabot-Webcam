@@ -1,3 +1,7 @@
+
+# ignorataan tuotettu matsku gitissä
+images/*
+
 # Logs
 logs
 *.log

@@ -3,6 +3,7 @@ const apikey = process.env.API_KEY; // Ladataan salainen api-avain .env-tiedosto
 
 const Discord = require("discord.js");
 
+/*
 const PiCamera = require('pi-camera');
 const myCamera = new PiCamera({
   mode: 'photo',
@@ -10,19 +11,39 @@ const myCamera = new PiCamera({
   width: 640,
   height: 480,
   nopreview: true,
-});
+});*/
+
+
+var NodeWebcam = require("node-webcam");
+
+//Default options 
+var opts = {
+    width: 1280,
+    height: 720,
+    quality: 100,
+    delay: 0,
+    saveShots: true,
+    output: "jpeg",
+    device: false,
+    callbackReturn: "location",
+    verbose: false
+};
 
 const commands = {
-    apua: function(msg){
-        msg.channel.send("Älä huoli, kyllä se siitä :)");
+    saatana: function(msg) {
+        msg.channel.send("Apua! Oon vaan kukka! :(");
     },
-    jyrki: function(msg){
-        myCamera.snap()
-            .then((result) => {
-                msg.channel.send("", { files: ["kuva.jpg"] });
-            })
-            .catch((error) => {
-                msg.channel.send(error);
+    kukka: function (msg) {
+        NodeWebcam.capture("images/kukka", opts, function (err, data){
+            if (!err){
+                console.log("Picture taken!");
+                //msg.channel.send("Naks! :)");
+                msg.channel.send("Jee huomiota :)", { files: ["images/kukka.jpg"] });
+            }                
+            else{
+                console.log(err);
+                msg.channel.send("Kukalla on paha darra... Kerro isille... :(");
+            }                
         });
     }
 }
@@ -32,26 +53,28 @@ var prevtime = 0;
 const bot = new Discord.Client();
 
 bot.on("ready", () => {
-    console.log("Ready"); 
+    console.log("Ready");
 });
 
 bot.on("message", async message => {
-    if(message.author.bot) return; // Jos botti lähettää viestin niin ignoorataan
-    if(message.channel.name != "jyrkikanava") return; // Kuunnellaan vaan tietyllä kanavalla
+    if (message.author.bot) return; // Jos botti lähettää viestin niin ignoorataan
+    if (message.channel.name != "puutarha") return; // Kuunnellaan vaan tietyllä kanavalla
+	//TODO: siirrä muuttujat jsoniksi
 
     var currtime = new Date();
     currtime = currtime.getTime();
 
     const command = message.content.toLowerCase();
 
-    if(command in commands){
-        if(currtime-prevtime < 60000){ // yksi minuutti
-            await message.channel.send("Älä hätäile, Jyrki haluaa olla hetken rauhassa :(");
+    if (command in commands) {
+        if (currtime - prevtime < 30000 && message.author.presence) { // puoli minsaa
+            await message.channel.send("Kukkaa ahdistaa. Kukalla on myös käsiaseita. Älä häiritse kukkaa.");
             return;
         }
-    
+
+        console.log(command + " by " + message.author.username);
         prevtime = currtime;
-        
+
         await commands[command](message);
     }
 
