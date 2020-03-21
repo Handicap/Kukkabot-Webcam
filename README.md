@@ -1,3 +1,5 @@
-# JyrkiBot
+# Kukkabot
 
-JyrkiBot on Ynnän Discordissa oleskeleva botti, joka aina pyydettäessä ottaa kuvan Ynnän rakkaista Jyrki II.I ja Jyrki II.II traakkipuista.
+Forkki Ynnän Jyrkibotista joka toimii hyödyntäen yleisempää webbikameratouhua Raspberry kameran sijaan.
+
+kts. https://github.com/roeyskoe/JyrkiBot
