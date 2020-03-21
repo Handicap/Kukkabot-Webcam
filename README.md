@@ -7,7 +7,7 @@ Forkki Ynnän Jyrkibotista joka toimii hyödyntäen yleisempää webbikameratouh
 - discord.js
 - node-webcam
 
-##Käyttö tyhjästä:
+## Käyttö tyhjästä:
 - asenna node.js
  - linux: apt install nodejs
 - asenna npm (nodejs package manager)
