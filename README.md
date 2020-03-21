@@ -9,9 +9,9 @@ Forkki Ynnän Jyrkibotista joka toimii hyödyntäen yleisempää webbikameratouh
 
 ## Käyttö tyhjästä:
 - asenna node.js
- - linux: apt install nodejs
+  - linux: apt install nodejs
 - asenna npm (nodejs package manager)
- - linux: apt install npm
+  - linux: apt install npm
 - asenna vaaditut node.js paketit
   - dotenv
     - npm install dotenv
